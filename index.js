@@ -4,13 +4,13 @@ const taskmodel = require("./models/task");
 const { connectDatabase } = require("./connection/connect");
 app.use(express.json());
 
-app.post("/api/task", async (req, res) => {
+app.post("/api/addtask", async (req, res) => {
   try {
     const newobj = {
-      TaskTitle: req.body.title,
-      TaskDescription: req.body.description,
-      TaskDueDate: req.body.date,
-      TaskStatus: req.body.status,
+      TaskTitle: req.body.taskTitle,
+      TaskDescription: req.body.taskdescription,
+      TaskDueDate: req.body.taskduedate,
+      TaskStatus: req.body.TaskStatus,
     };
     console.log(newobj);
     const taskdata = new taskmodel(newobj);
