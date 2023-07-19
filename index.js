@@ -21,10 +21,10 @@ app.post("/api/addtask", async (req, res) => {
   }
 });
 
-app.get("/api/task", async (req, res) => {
+app.get("/api/gettask", async (req, res) => {
   try {
-    const taskData = await taskmodel.find();
-    return res.status(200).json({ success: true, data: taskData });
+    const task = await taskmodel.find();
+    return res.status(200).json({ success: true, task: task });
   } catch (error) {
     return res.status(400).json({ success: false, error: error.message });
   }
