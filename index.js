@@ -7,9 +7,9 @@ app.use(express.json());
 app.post("/api/addtask", async (req, res) => {
   try {
     const newobj = {
-      TaskTitle: req.body.taskTitle,
-      TaskDescription: req.body.taskdescription,
-      TaskDueDate: req.body.taskduedate,
+      taskTitle: req.body.taskTitle,
+      taskdescription: req.body.taskdescription,
+      taskduedate: req.body.taskduedate,
       TaskStatus: req.body.TaskStatus,
     };
     console.log(newobj);
@@ -25,6 +25,26 @@ app.get("/api/gettask", async (req, res) => {
   try {
     const task = await taskmodel.find();
     return res.status(200).json({ success: true, task: task });
+  } catch (error) {
+    return res.status(400).json({ success: false, error: error.message });
+  }
+});
+app.delete("/api/deletetask/:id", async (req, res) => {
+  try {
+    const deleteit = await taskmodel.findByIdAndDelete(req.params.id);
+    return res.json({ success: true });
+  } catch (error) {
+    return res.status(400).json({ success: false, error: error.message });
+  }
+});
+
+//update operation
+app.post("/api/handlestatus/:id", async (req, res) => {
+  try {
+    const data = await taskmodel.findByIdAndUpdate(req.params.id, {
+      TaskStatus: req.body.TaskStatus,
+    });
+    return res.status(200).json({ success: true, data: data });
   } catch (error) {
     return res.status(400).json({ success: false, error: error.message });
   }

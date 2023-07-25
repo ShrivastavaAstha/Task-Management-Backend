@@ -1,9 +1,9 @@
 const mongoose = require("mongoose");
 
 const taskSchema = new mongoose.Schema({
-  TaskTitle: String,
-  TaskDescription: String,
-  TaskDueDate: String,
+  taskTitle: String,
+  taskdescription: String,
+  taskduedate: String,
   TaskStatus: { type: String, enum: ["To-do", "On-going", "Completed"] },
 });
 
